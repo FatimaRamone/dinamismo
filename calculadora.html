@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <input type="number" name="operando1" id="operando1" value="0" style="display: none;">
+    <input type="text" name="operador" id="operador">
+    <input type="number" name="operando2" id="operando2">
+    <button class="boton" onclick="realizarOperacion()">Haz tu operación</button>
+
+    <h1 id="resultado">0</h1>
+    
+    <script>
+        let operador1;
+        let resultado;
+
+        function realizarOperacion() {
+            const operador2 = parseFloat(document.getElementById("operando2").value);
+            const operacion = document.getElementById("operador").value;
+
+            if (operador1 === undefined) {
+                // Primera operación, asignar operador1
+                operador1 = parseFloat(document.getElementById("operando1").value);
+                resultado = operador1;
+            } else {
+                switch (operacion) {
+                    case '+':
+                        resultado = resultado + operador2;
+                        break;
+                    case '-':
+                        resultado = resultado - operador2;
+                        break;
+                    case '*':
+                        resultado = resultado * operador2;
+                        break;
+                    case '/':
+                        if (operador2 !== 0) {
+                            resultado = resultado / operador2;
+                        } else {
+                            console.log('Error: División entre cero');
+                            return resultado;
+                        }
+                        break;
+                    default:
+                        console.log('Operación inválida');
+                        return resultado;
+                }
+            }
+
+            document.getElementById("resultado").textContent = resultado;
+        }
+    </script>
+</body>
+</html>
